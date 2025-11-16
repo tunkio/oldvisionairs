@@ -64,14 +64,15 @@ curl -X POST https://<address>/stt -F "file=@test.mp3" -F "pass=proxypass"
 
 ### Download Audio Sample
 
-Uploads a text and returns an audio file.
+Sends a text and returns an audio file.
 
-**POST** `/stt`
+**POST** `/tts`
 
 Example `curl`:
 
 ```bash
-curl -X POST https://<address>/tts -H "Content-Type: application/json"   -d '{"text":"Old visionairs. We are old. We are alive. We are still Kickin!", "pass": "proxypass", "voice": "qxTFXDYbGcR8GaHSjczg"}
+curl -X POST https://<address>/tts -H "Content-Type: application/json" \
+    -d '{"text":"Old visionairs. We are old. We are alive. We are still Kickin!", "pass": "proxypass", "voice": "qxTFXDYbGcR8GaHSjczg"}
 ```
 
 ## Development
