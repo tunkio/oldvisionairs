@@ -1,0 +1,88 @@
+# Old Visionairs Elevenlabs API Proxy 
+
+## Overview
+
+This repository contains the source code and configuration files for deploying an application to Google Cloud Platform (GCP) using Cloud Run and Docker.
+
+## Features
+
+* Dockerized application
+* Deployment to Cloud Run
+* Environment variable management
+* Audio sample download endpoint (text-to-speech)
+* Audio sample upload endpoint (speech-to-text)
+
+## Requirements
+
+* Google Cloud SDK (gcloud)
+* Docker
+* A GCP project with billing enabled
+* Cloud Run API enabled
+
+## Setup
+
+1. Initialize gcloud and set up the project:
+
+   ```bash
+   ```
+
+gcloud init
+
+````
+2. Build the Docker image using Cloud Build:
+```bash
+gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/app:latest
+````
+
+3. Deploy to Cloud Run:
+
+   ```bash
+   ```
+
+gcloud run deploy app \
+--image gcr.io/YOUR_PROJECT_ID/app:latest \ 
+--platform managed \
+--region europe-north1 \
+--allow-unauthenticated \
+--set-env-vars ELEVENLABS_API_KEY=elevenlabs_api_key \
+--set-env-vars API_KEY=proxy_api_key
+````
+
+## API Endpoints
+
+### Upload Audio Sample
+
+Uploads an audio file and returns the transcribed text.
+
+**POST** `/stt`
+
+Example `curl`:
+
+```bash
+curl -X POST https://<address>/stt -F "file=@test.mp3" -F "pass=proxypass"
+```
+
+### Download Audio Sample
+
+Uploads a text and returns an audio file.
+
+**POST** `/stt`
+
+Example `curl`:
+
+```bash
+curl -X POST https://<address>/tts -H "Content-Type: application/json"   -d '{"text":"Old visionairs. We are old. We are alive. We are still Kickin!", "pass": "proxypass", "voice": "qxTFXDYbGcR8GaHSjczg"}
+```
+
+## Development
+
+Run locally with Docker:
+
+```bash
+python3 app
+```
+
+## License
+
+MIT
+
